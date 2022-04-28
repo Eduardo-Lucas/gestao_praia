@@ -17,7 +17,9 @@ class Categoria(models.Model):
 
 class Produto(models.Model):
     empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT)
+    categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
     nome = models.CharField(max_length=50, help_text='Nome do Produto')
+    image = models.ImageField(upload_to='produtos', blank=True, null=True)
     disponivel = models.BooleanField(default=True, help_text='Tem produto no estoque?')
     preco = models.DecimalField(max_digits=10, decimal_places=2, help_text='Preço do Produto')
 
