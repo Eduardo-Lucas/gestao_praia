@@ -28,8 +28,14 @@ class Pedido(models.Model):
     aberto = models.BooleanField(default=True, help_text='Indica se a comanda está aberta ou fechada')
     fechado_as = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-aberto', 'funcionario', 'mesa', 'aberto']
 
-class PedidoItens(models.Model):
+    def __str__(self):
+        return str(self.id)
+
+
+class PedidoItem(models.Model):
     empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT)
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.PROTECT, help_text='Produto sendo pedido')
